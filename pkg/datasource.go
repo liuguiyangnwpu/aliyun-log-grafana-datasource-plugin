@@ -8,6 +8,7 @@ import (
 	"strings"
 
 	sls "github.com/aliyun/aliyun-log-go-sdk"
+    "time"
 	"github.com/grafana/grafana_plugin_model/go/datasource"
 	"github.com/hashicorp/go-hclog"
 	"github.com/hashicorp/go-plugin"
@@ -47,6 +48,8 @@ func (ds *SlsDatasource) Query(ctx context.Context, tsdbReq *datasource.Datasour
 		Endpoint:        tsdbReq.Datasource.Url,
 		AccessKeyID:     accessKeyId,
 		AccessKeySecret: accessKeySecret,
+        RequestTimeOut:  time.Minute,
+        RetryTimeOut:    time.Minute,
 	}
 
 	queries := tsdbReq.Queries
